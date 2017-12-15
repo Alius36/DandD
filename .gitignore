@@ -4,8 +4,6 @@
 *$py.class
 *~
 .coverage
-#BOH
-.coveragerc
 coverage.xml
 build/
 dist/
