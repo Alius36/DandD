@@ -4,6 +4,8 @@
 *$py.class
 *~
 .coverage
+#BOH
+.coveragerc
 coverage.xml
 build/
 dist/
@@ -19,3 +21,6 @@ Data.fs*
 .DS_Store
 coverage
 test
+
+#To ignore file .ini 
+development.ini
