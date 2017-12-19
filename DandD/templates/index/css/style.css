@@ -1,7 +1,3 @@
-/* =============================================================================
-   HTML5 CSS Reset Minified 
-   ========================================================================== */
-
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
 body{line-height:1}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
@@ -16,89 +12,93 @@ table{border-collapse:collapse;border-spacing:0}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
 input,select{vertical-align:middle}
 li{list-style:none}
-
-
 /* ---- base ---- */
-
-html,body{ 
-	width:100%;
-	height:100%;
-	background:#000;
-  
+html,body{
+width:100%;
+height:100%;
+background:#000;
 }
-
-form{
-  width: 100%;
-  padding-top: 80px;
-  margin: auto;
-  text-align: center;
+a.return{
   position: absolute;
-  
-
+  top: 0;
+  right: 0;
+  background-color: #4CAF50;
+  color:white;
+  padding: 10px 15px;
+  appearance:button;
 }
-
+form{
+width: 100%;
+padding-top: 80px;
+margin: auto;
+text-align: center;
+position: absolute;
+}
 input[type=text], input[type=password]{
-  width: 20%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+width: 20%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
 }
-
 button{
-    alignment-baseline: central;
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-   
-    border: none;
-    cursor: pointer;
-    width: 10%;
-}
+alignment-baseline: central;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
 
-.container{
-  align-content: center;
-}
-
-.imgcontainer{
-  text-align: center;
+border: none;
+cursor: pointer;
+width: 10%;
 }
 
 img.avatar{
-  width: 30%;
+width: 40%;
+pointer-events: none;
+}
+.container{
+align-content: center;
+padding-top: 120px;
 }
 
-
-span.psw{
-
+#sign{
+color: white;
+}
+.imgcontainer{
+text-align: center;
+position: absolute;
+padding-top: 40px;
+}
+.containersign{
+align-content: center;
+padding-top: 140px;
 }
 
-
-
-
+.imgcontainersign{
+text-align: center;
+position: absolute;
+padding-top: 10px;
+color: white;
+font-size: x-large;
+}
 html{
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
 body{
-  font:normal 75% Arial, Helvetica, sans-serif;
+font:normal 75% Arial, Helvetica, sans-serif;
 }
-
 canvas{
-  display:block;
-  vertical-align:bottom;
+display:block;
+vertical-align:bottom;
 }
-
-
 /* ---- particles.js container ---- */
-
 #particles-js{
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  background-image: url('');
-  background-size: cover;
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
+width: 100%;
+height: 100%;
+background-color: #000000;
+background-image: url('');
+background-size: cover;
+background-position: 50% 50%;
+background-repeat: no-repeat;
 }
