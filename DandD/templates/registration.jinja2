@@ -1,0 +1,42 @@
+{% extends "layout.jinja2" %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>DandD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  </head>
+  <body link="white" vlink="white">
+    <div class="imgcontainersign">
+      <img src="{{request.static_url('DandD:static/logo.png') }}" alt="Avatar" class="avatar"><br><b>REGISTRATION</b>
+    </div>
+    <form>
+      <div class="form-group containersign">
+        <input type="text" class="form-control" id="nome" placeholder="Nome" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="cognome" placeholder="Cognome" required>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="username" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+          <input type="password" class="form-control" name="pwd" placeholder="Enter a password" required>
+      </div>
+      <div class="form-group">
+          <input type="password" class="form-control" name="pwd_confirm" placeholder="Confirm password" required>
+      </div>
+      <a href="{{request.route_url('login_view') }}" class="btn btn-danger">Back</a>
+      <button type="submit" class="btn btn-success">Sign up</button>
+    </form>
+    
+    <div id="particles-js"></div>
+    <script src="{{request.static_url('DandD:static/js/particles.js')}}"></script>
+    <script src="{{request.static_url('DandD:static/js/app.js')}}"></script>
+  </body>
+</html>
+
+{% endblock %}
