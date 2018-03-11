@@ -1,3 +1,4 @@
+# coding: utf-8
 import logging
 
 from DandD.controllers.authentication_controller import AuthenticationController
@@ -14,7 +15,6 @@ class Authentication:
     def __init__(self, request):
         self.request = request
 
-    # ../templates/login.jinja2
     @view_config(route_name='registration', renderer='json', request_method='POST')
     def registration(self):
         request = self.request
@@ -24,9 +24,10 @@ class Authentication:
         password = request.params.get('password', None)
         username = request.params.get('username', None)
 
-        logger.info('Login input are: {nome}, {cognome}, {password}, {username}'.format(nome=nome, cognome=cognome,
-                                                                                        password=password,
-                                                                                        username=username))
+        logger.info('Registration input are: {nome}, {cognome}, {password}, {username}'.format(nome=nome,
+                                                                                               cognome=cognome,
+                                                                                               password=password,
+                                                                                               username=username))
 
         if nome is not None and nome != '':
             if cognome is not None and cognome != '':
@@ -39,13 +40,17 @@ class Authentication:
                         return result
 
                     else:
-                        logger.error('Login failed because param beacuse missed param USERNAME')
+                        logger.error('Registration failed because missing param USERNAME')
+                        return make_response('Missing USERNAME! Check it.', 400)
                 else:
-                    logger.error('Login failed because param beacuse missed param PASSWORD')
+                    logger.error('Registration failed because missing param PASSWORD')
+                    return make_response('Missing PASSWORD! Check it.', 400)
             else:
-                logger.error('Login failed because param beacuse missed param COGNOME')
+                logger.error('Registration failed because missing param COGNOME')
+                return make_response('Missing COGNOME! Check it.', 400)
         else:
-            logger.error('Login failed because param beacuse missed param NOME')
+            logger.error('Registration failed because missing param NOME')
+            return make_response('Missing NOME! Check it.', 400)
 
     @view_config(route_name='home', renderer='../templates/login.jinja2', request_method='GET')
     @view_config(route_name='login_view', renderer='../templates/login.jinja2', request_method='GET')

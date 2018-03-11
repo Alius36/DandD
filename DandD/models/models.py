@@ -1,4 +1,5 @@
 # coding: utf-8
+from DandD.utilities.exception import WrongInput, DuplicateValue
 from sqlalchemy import BigInteger, Column, DateTime, Text, text
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -21,16 +22,17 @@ class User(Base):
     def __init__(self, dict_data):
         if dict_data is not None:
             for key in dict_data:
-                print key
                 setattr(self, key, dict_data[key])
         else:
-            # TODO gestire eccezzione correttamente
-            raise IndexError
+            raise WrongInput
 
     @classmethod
     def insert_new_user(cls, dbsession, user):
         if user is not None:
             dbsession.add(user)
         else:
-            # TODO gestire eccezzione correttamente
-            raise IndexError
+            raise WrongInput
+
+    @classmethod
+    def get_all_username(cls, dbsession):
+        return dbsession.query(User.username).all()

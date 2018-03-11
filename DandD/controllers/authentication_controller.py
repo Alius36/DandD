@@ -1,8 +1,11 @@
+# coding: utf-8
+import json
 import logging
 
 import datetime
 
 from DandD.models import User
+from DandD.utilities.exception import DuplicateValue, WrongInput
 from DandD.utilities.security import hash_password
 from DandD.utilities.utils import make_response
 
@@ -24,9 +27,19 @@ class AuthenticationController:
             'iscrizione_dt': datetime.datetime.now(),
             'username': username
         })
-        # try:
-        #     User.insert_new_user(dbsession, new_user)
-        # except Exception, e:
-        #     return make_response(666, 'Registration failed! Please try again.')
-        User.insert_new_user(dbsession, new_user)
-        return make_response(200, 'Registration complete!')
+        try:
+            username_list = User.get_all_username(dbsession)
+
+            if username in username_list:
+                logger.error('Username giá usato! Cambialo.')
+                return WrongInput('Username giá usato! Cambialo.', 400)
+            else:
+                User.insert_new_user(dbsession, new_user)
+        except WrongInput, e:
+            logger.error(json.dumps(e))
+            return WrongInput('I dati sono sbagliati! Controllali.', 400)
+        except DuplicateValue, e:
+            logger.error(json.dumps(e))
+            return DuplicateValue('Questo username é giá usato! Provane un\'altro.', 500)
+
+        return make_response('Registrazione completata!', 200)
