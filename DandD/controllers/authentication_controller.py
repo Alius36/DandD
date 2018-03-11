@@ -29,17 +29,16 @@ class AuthenticationController:
         })
         try:
             username_list = User.get_all_username(dbsession)
+            for usr in username_list:
 
-            if username in username_list:
-                logger.error('Username giá usato! Cambialo.')
-                return WrongInput('Username giá usato! Cambialo.', 400)
-            else:
-                User.insert_new_user(dbsession, new_user)
+                if username == usr[0]:
+                    logger.error('Username giá usato! Cambialo.')
+                    return make_response('Username giá usato! Cambialo.', 400)
+            User.insert_new_user(dbsession, new_user)
+            return make_response('Registrazione completata!', 200)
         except WrongInput, e:
-            logger.error(json.dumps(e))
-            return WrongInput('I dati sono sbagliati! Controllali.', 400)
+            logger.error(e)
+            return make_response('I dati sono sbagliati! Controllali.', 400)
         except DuplicateValue, e:
-            logger.error(json.dumps(e))
-            return DuplicateValue('Questo username é giá usato! Provane un\'altro.', 500)
-
-        return make_response('Registrazione completata!', 200)
+            logger.error(e)
+            return make_response('Questo username é giá usato! Provane un\'altro.', 500)

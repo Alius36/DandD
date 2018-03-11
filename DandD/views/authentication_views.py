@@ -1,4 +1,5 @@
 # coding: utf-8
+import json
 import logging
 
 from DandD.controllers.authentication_controller import AuthenticationController
@@ -9,9 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class Authentication:
-    success = 200
-    failed = 666
-
     def __init__(self, request):
         self.request = request
 
@@ -36,7 +34,7 @@ class Authentication:
                         # controller
                         result = AuthenticationController.registration(request.dbsession, nome, cognome, password,
                                                                        username)
-                        print 'FINE: ', result
+                        logger.info('Registration OUTPUT is: {}'.format(json.dumps(result)))
                         return result
 
                     else:

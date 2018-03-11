@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('#registration_form').submit(function(event) {
         event.preventDefault();
+        //TODO input validation: regex, check username on change
         var form_data = $(this).serialize();
         var pss = $('#password').val();
         var cnf_pss = $('#password_confirm').val();
@@ -11,10 +12,30 @@ $(document).ready(function(){
               dataType: 'JSON',
               data: $(this).serialize(),
               success: function(data){
-                $.toast(data.message);
+                if (data.code == 200){
+                    $.toast({
+                        text: data.message,
+                        allowToastClose: true,
+                        loader: false,
+                        icon: 'success'
+                    });
+                }
+                else {
+                    $.toast({
+                        text: data.message,
+                        allowToastClose: true,
+                        loader: false,
+                        icon: 'error'
+                    });
+                }
               },
               error: function(data){
-                $.toast(data.message);
+                $.toast({
+                    text: 'Registrazione fallita!',
+                    allowToastClose: true,
+                    loader: false,
+                    icon: 'error'
+                });
               }
             });
         }
