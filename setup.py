@@ -20,7 +20,8 @@ requires = [
     'zope.sqlalchemy',
     'waitress',
     'pg8000',
-    'bcrypt'
+    'bcrypt',
+    'pyramid_beaker'
 ]
 
 tests_require = [

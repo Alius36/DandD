@@ -4,6 +4,8 @@ import logging
 
 from DandD.controllers.authentication_controller import AuthenticationController
 from DandD.utilities.utils import make_response
+from pyramid.httpexceptions import HTTPFound
+from pyramid.security import remember
 from pyramid.view import view_config
 
 logger = logging.getLogger(__name__)
@@ -54,6 +56,35 @@ class Authentication:
     @view_config(route_name='login_view', renderer='../templates/login.jinja2', request_method='GET')
     def login_view(self):
         return {'1': 'one'}
+
+    @view_config(route_name='login', request_method='POST')
+    def login(self):
+        request = self.request
+
+        username = request.params.get('username', None)
+        password = request.params.get('password', None)
+
+        logger.info('LOGIN input params are {username}, {password}'.format(username=username, password=password))
+
+        if username is not None and username != '':
+            if password is not None and password != '':
+                result, headers = AuthenticationController.login(request, request.dbsession, username, password)
+                # print 'RESULT: ', result
+                # print 'SESSION: ', request.session
+                if result['code'] == 200:
+                    # print 'AUTHENTICATED_USERID', request.authenticated_userid
+                    # print 'RESPONSE: ', request.response
+                    # print 'HEADERS RESPONSE: ', request.response.headers
+                    # print 'HEADERS RESPONSE: ', request
+                    return HTTPFound(location='/pippo')
+                else:
+                    raise Exception
+            else:
+                logger.error('LOGIN failed because missing param PASSWORD')
+                return make_response('Missing PASSWORD! Check it.', 400)
+        else:
+            logger.error('LOGIN failed because missing param USERNAME')
+            return make_response('Missing USERNAME! Check it.', 400)
 
     @view_config(route_name='registration_view', renderer='../templates/registration.jinja2', request_method='GET')
     def registration_view(self):

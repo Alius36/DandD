@@ -46,8 +46,13 @@ $(document).ready(function(){
                 loader: false,
                 icon: 'error'
             })
-
         }
-
     });
+
+//$('#username').on('input', function(e) {
+//    console.log('editing')
+//    // Ottengo lista username e confronto
+//    $(this).css('border-color','#d81c1c');
+//});
+
 });
