@@ -4,7 +4,7 @@ def includeme(config):
 
 
     # AUTHENTICATION
-    config.add_route('/pippo', '/pippo')
+    config.add_route('pippo', '/pippo')
     config.add_route('home', '/')
     config.add_route('login', '/login')
     config.add_route('login_view', '/login/view')

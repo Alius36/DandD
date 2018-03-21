@@ -31,23 +31,21 @@ class AuthenticationController:
         try:
             username_list = User.get_all_username(dbsession)
             for usr in username_list:
-
+                print usr[0]
                 if username == usr[0]:
                     logger.error('Username giá usato! Cambialo.')
-                    return make_response('Username giá usato! Cambialo.', 400)
+                    return make_response('Username giá usato! Cambialo.', 409)
             User.insert_new_user(dbsession, new_user)
             return make_response('Registrazione completata!', 200)
         except WrongInput, e:
             logger.error(e)
-            return make_response('I dati sono sbagliati! Controllali.', 400)
+            return make_response('I dati sono sbagliati! Controllali.', 406)
         except DuplicateValue, e:
             logger.error(e)
-            return make_response('Questo username é giá usato! Provane un\'altro.', 500)
+            return make_response('Questo username é giá usato! Provane un\'altro.', 409)
 
     @classmethod
     def login(cls, request, dbsession, username, password):
-        if request.authenticated_userid is not None and username != request.authenticated_userid:
-            pass
 
         user = User.get_user_by_username(dbsession, username)
 
@@ -59,6 +57,13 @@ class AuthenticationController:
                 'username': user.username,
                 'role': user.fk_role.value
             }
+
+            if request.authenticated_userid is not None and username != request.authenticated_userid:
+                return make_response('Sei giá loggato con un\'altra utenza. Effettua il logout prima di autenticarti '
+                                     'nuovamente.'.format(request.authenticated_userid), 409)
+            elif request.authenticated_userid is not None and username == request.authenticated_userid:
+                return make_response('Sei giá loggato.', 409)
+
             if check_password(password, user.password):
                 print 'password corretta!'
                 headers = remember(request, username)
@@ -66,8 +71,8 @@ class AuthenticationController:
 
                 request.session['user'] = saving_user
                 logger.info('LOGIN successful!')
-                return make_response('Success!', 200), headers
+                return make_response('Success!', 200)  # , headers
             else:
-                return make_response('Wrong password! Check it.', 400)
+                return make_response('Password errata! Riprova.', 406)  # , []
         else:
-            return make_response('This username doesn\'t exist! Check it and try to log in again.', 400)
+            return make_response('Questo utente non esiste! Riprova o registrati e poi loggati.', 406)  # , []

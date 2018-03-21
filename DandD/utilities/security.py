@@ -12,7 +12,8 @@ def check_password(pw, hashed_pw):
     expected_hash = hashed_pw.encode('utf8')
     return bcrypt.checkpw(pw.encode('utf8'), expected_hash)
 
-
+# Funzione che viene chiamata ogni volta che c'é da verificare i permessi:
+# ha il compito di ritornare il ruolo (principles) dell'utente autenticato (loggato). DEVE RITORNARE UNA LISTA!!!
 def role_finder(username, request):
     # return ['player']
     if 'user' in request.session:

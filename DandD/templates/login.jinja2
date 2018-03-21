@@ -8,36 +8,28 @@
 		<meta charset="utf-8">
 		<title>DandD</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+        <script src="{{request.static_url('DandD:static/js/login.js')}}"></script>
 	</head>
 	<body link="white" vlink="white">
 		<div class="imgcontainer">
             <img src="{{request.static_url('DandD:static/logo.png') }}" alt="Avatar" class="avatar">
         </div>
-		<!-- <form>
-			<div class="container">
-				<input type="text" name="username" placeholder="Enter username" required><br>
-				<input type="password" name="psw" placeholder="Enter Password" required><br>
-				<button type="submit">Login</button><br><br>
-				<span class="psw"><a href="#"><b>Forgot password</b></a></span><br>
-				<div id="sign">
-					Are you not registered?
-					<a href="{{request.route_url('registration_view') }}"><b>  Sign up!</b></a>
-				</div>
-			</div>
-		</form> -->
 		<form id='login_form' action="{{request.route_url('login') }}" method="POST">
             <div class="form-group containersign">
-                <input type="text" class="form-control" name="username" placeholder="Username" required>
+                <input type="text" class="form-control" name="username" placeholder="Username" id="username" required>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             </div>
-            <button type="submit" class="btn btn-success" id='login_submit_button'>Login</button>
-            <span class="psw"><a href="#"><b>Forgot password</b></a></span><br>
-            <div id="sign">
-                Are you not registered?
-                <a href="{{request.route_url('registration_view') }}"><b>  Sign up!</b></a>
+            <div>
+				<button type="submit" class="btn btn-success" id='login_submit_button'>Login</button>
+			</div>
+			<div>
+                <div id="sign">
+					<span class="psw"><a href="#"><b>Forgot password</b></a></span><br>
+                    Are you not registered?
+                    <a href="{{request.route_url('registration_view') }}"><b>  Sign up!</b></a>
+                </div>
             </div>
         </form>
 

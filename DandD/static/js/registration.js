@@ -2,7 +2,6 @@ $(document).ready(function(){
     $('#registration_form').submit(function(event) {
         event.preventDefault();
         //TODO input validation: regex, check username on change
-        var form_data = $(this).serialize();
         var pss = $('#password').val();
         var cnf_pss = $('#password_confirm').val();
         if (pss == cnf_pss) {
