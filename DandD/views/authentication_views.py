@@ -21,8 +21,12 @@ class Authentication:
         self.not_acceptable_request = 406
         self.success_request = 200
 
+    @view_config(route_name='registration', renderer='../templates/registration.jinja2', request_method='GET',
+                 accept='text/html')
+    def registration_view(self):
+        return {'1': 'one'}
 
-    @view_config(route_name='registration', renderer='json', request_method='POST')
+    @view_config(route_name='registration', renderer='json', request_method='POST', accept='application/json')
     def registration(self):
         request = self.request
 
@@ -71,19 +75,22 @@ class Authentication:
             logger.error('REGISTRATION FALLITA perché manca il parametro NOME')
             return HTTPNotAcceptable('Manca il NOME! Controlla.')
 
-    @view_config(route_name='home', renderer='../templates/login.jinja2', request_method='GET')
-    @view_config(route_name='login_view', renderer='../templates/login.jinja2', request_method='GET')
+    @view_config(route_name='home', renderer='../templates/login.jinja2', request_method='GET',
+                 accept='text/html')
+    @view_config(route_name='login', renderer='../templates/login.jinja2', request_method='GET',
+                 accept='text/html')
     def login_view(self):
         return {'1': 'one'}
 
-    @view_config(route_name='login', renderer='json', request_method='POST')
+    @view_config(route_name='login', renderer='json', request_method='POST', accept='application/json')
     def login(self):
         request = self.request
 
         username = request.params.get('username', None)
         password = request.params.get('password', None)
 
-        logger.info('LOGIN: i parametri di INPUT sono {username}, {password}'.format(username=username, password=password))
+        logger.info('LOGIN: i parametri di INPUT sono {username}, {password}'.format(username=username,
+                                                                                     password=password))
 
         if username is not None and username != '':
             if password is not None and password != '':
@@ -108,7 +115,3 @@ class Authentication:
         else:
             logger.error('LOGIN FALLITA perché manca il parametro USERNAME')
             return HTTPNotAcceptable(body='Manca USERNAME! Controlla.')
-
-    @view_config(route_name='registration_view', renderer='../templates/registration.jinja2', request_method='GET')
-    def registration_view(self):
-        return {'1': 'one'}

@@ -9,6 +9,9 @@ $(document).ready(function(){
             $.ajax({
               type: $(this).attr('method'),
               url: $(this).attr('action'),
+              header: {
+                'Accept': 'application/json'
+              },
               dataType: 'application/json',
               data: $(this).serialize(),
               statusCode: {

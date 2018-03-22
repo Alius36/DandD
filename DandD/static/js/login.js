@@ -6,6 +6,9 @@ $(document).ready(function(){
         var username = $('#username').val();
         $.ajax({
               type: $(this).attr('method'),
+              header: {
+                'Accept': 'application/json'
+              },
               url: $(this).attr('action'),
               dataType: 'application/json',
               data: $(this).serialize(),
