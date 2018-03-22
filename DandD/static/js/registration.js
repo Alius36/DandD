@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('#registration_form').submit(function(event) {
         event.preventDefault();
+        event.stopPropagation();
         //TODO input validation: regex, check username on change
         var pss = $('#password').val();
         var cnf_pss = $('#password_confirm').val();
@@ -8,39 +9,55 @@ $(document).ready(function(){
             $.ajax({
               type: $(this).attr('method'),
               url: $(this).attr('action'),
-              dataType: 'JSON',
+              dataType: 'application/json',
               data: $(this).serialize(),
-              success: function(data){
-                if (data.code == 200){
+              statusCode: {
+                200: function(data) {
                     $.toast({
-                        text: data.message,
+                        text: data.statusText+': '+data.responseText,
                         allowToastClose: true,
                         loader: false,
                         icon: 'success'
                     });
-                }
-                else {
+                },
+                406: function(data) {
                     $.toast({
-                        text: data.message,
+                        text: data.statusText+': '+data.responseText,
                         allowToastClose: true,
                         loader: false,
                         icon: 'error'
                     });
+                },
+                409: function(data) {
+                    $.toast({
+                        text: data.statusText+': '+data.responseText,
+                        allowToastClose: true,
+                        loader: false,
+                        icon: 'error'
+                    });
+                },
+                500: function(data) {
+                    $.toast({
+                        text: data.statusText+': abbiamo qualche problema interno. Ci scusiamo per il disagio!',
+                        allowToastClose: true,
+                        loader: false,
+                        icon: 'error'
+                    });
+                },
+                default: function(data) {
+                    $.toast({
+                            text: 'Stiamo riscontrando delle anomalie. Ci scusiamo per il disagio!',
+                            allowToastClose: true,
+                            loader: false,
+                            icon: 'error'
+                    });
                 }
-              },
-              error: function(data){
-                $.toast({
-                    text: 'Registrazione fallita!',
-                    allowToastClose: true,
-                    loader: false,
-                    icon: 'error'
-                });
               }
             });
         }
-        else{
+        else {
             $.toast({
-                text: 'La password non é stata confermata correttamente! Controlla.',
+                text: 'La password non é stata confermata correttamente! Riprova.',
                 allowToastClose: true,
                 loader: false,
                 icon: 'error'

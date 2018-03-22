@@ -65,14 +65,15 @@ class AuthenticationController:
                 return make_response('Sei giá loggato.', 409)
 
             if check_password(password, user.password):
-                print 'password corretta!'
+                logger.debug('CHECK PASSWORD completata!')
+
                 headers = remember(request, username)
                 request.response.headers = headers
 
+                logger.debug('Salvataggio informazioni dell\'utente dentro la sessione.')
                 request.session['user'] = saving_user
-                logger.info('LOGIN successful!')
-                return make_response('Success!', 200)  # , headers
+                return make_response('Success!', 200)
             else:
-                return make_response('Password errata! Riprova.', 406)  # , []
+                return make_response('Password errata! Riprova.', 406)
         else:
-            return make_response('Questo utente non esiste! Riprova o registrati e poi loggati.', 406)  # , []
+            return make_response('Questo utente non esiste! Riprova o registrati e poi loggati.', 406)
