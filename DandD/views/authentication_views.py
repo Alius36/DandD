@@ -7,7 +7,7 @@ from DandD.utilities.exception import WrongInput
 from DandD.utilities.utils import make_response
 from pyramid.httpexceptions import HTTPFound, HTTPException, HTTPBadRequest, HTTPNotAcceptable, HTTPConflict, \
     HTTPInternalServerError, HTTPOk
-from pyramid.security import remember
+from pyramid.security import remember, forget
 from pyramid.view import view_config
 
 logger = logging.getLogger(__name__)
@@ -115,3 +115,16 @@ class Authentication:
         else:
             logger.error('LOGIN FALLITA perché manca il parametro USERNAME')
             return HTTPNotAcceptable(body='Manca USERNAME! Controlla.')
+
+    @view_config(route_name='logout', renderer='json')
+    def logout(self):
+        request = self.request
+
+        headers = forget(request)
+        next_url = request.route_url('login')
+
+        logger.info('LOGOUT: url = {}, headers = {}'.format(next_url, headers))
+
+        request.response.headers = headers
+        # return HTTPFound(location=next_url, headers=headers)
+        return make_response('Logout successful!', 302, next_url)

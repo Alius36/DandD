@@ -71,7 +71,6 @@ class AuthenticationController:
                 request.response.headers = headers
 
                 logger.debug('Salvataggio informazioni dell\'utente dentro la sessione.')
-                request.session['user'] = saving_user
                 return make_response('Success!', 200)
             else:
                 return make_response('Password errata! Riprova.', 406)
