@@ -32,9 +32,6 @@ class ManualController:
                 if (filename,) not in Manual.get_all_title(request.dbsession):
                     path = os.path.join(folder, filename)
 
-                    # if not os.path.exists(folder):
-                    #     logger.info('Cartella MANUALI creata!')
-                    #     os.mkdir(folder)
                     create_manuals_folder(folder)
 
                     server_file = open(path, 'wb')
@@ -65,9 +62,6 @@ class ManualController:
             else:
                 logger.error('UPLOAD CONTROLLER: md5 differenti. Ricevuto: {}, calcolato: {}'.format(md5, calc_md5))
                 return make_response('Spiacenti ma il file risulta essere corrotto.', 406)
-        # TODO:
-        # - Mettere i permessi
-
         except OSError, e:
             logger.error('UPLOAD OSError: {}'.format(e))
             return make_response('Siamo spiacenti ma stiamo riscontrando un momentaneo disservizio interno', 500)
