@@ -50,13 +50,13 @@ class AuthenticationController:
         user = User.get_user_by_username(dbsession, username)
 
         if user:
-            saving_user = {
-                'id': user.id,
-                'nome': user.nome,
-                'cognome': user.cognome,
-                'username': user.username,
-                'role': user.fk_role.value
-            }
+            # saving_user = {
+            #     'id': user.id,
+            #     'nome': user.nome,
+            #     'cognome': user.cognome,
+            #     'username': user.username,
+            #     'role': user.fk_role.value
+            # }
 
             if request.authenticated_userid is not None and username != request.authenticated_userid:
                 return make_response('Sei giá loggato con un\'altra utenza. Effettua il logout prima di autenticarti '
@@ -67,7 +67,7 @@ class AuthenticationController:
             if check_password(password, user.password):
                 logger.debug('CHECK PASSWORD completata!')
 
-                headers = remember(request, username)
+                headers = remember(request, user.id)
                 request.response.headers = headers
 
                 logger.debug('Salvataggio informazioni dell\'utente dentro la sessione.')

@@ -89,8 +89,8 @@ class Authentication:
         username = request.params.get('username', None)
         password = request.params.get('password', None)
 
-        logger.info('LOGIN: i parametri di INPUT sono {username}, {password}'.format(username=username,
-                                                                                     password=password))
+        # logger.info('LOGIN: i parametri di INPUT sono {username}, {password}'.format(username=username,
+        logger.info('LOGIN: i parametri di INPUT sono {username}'.format(username=username))
 
         if username is not None and username != '':
             if password is not None and password != '':

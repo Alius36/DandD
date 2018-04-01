@@ -1,3 +1,4 @@
+from DandD.utilities.file_system import create_manuals_folder
 from DandD.utilities.security import RootFactory, role_finder
 from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
@@ -19,4 +20,7 @@ def main(global_config, **settings):
     config.include('.models')
     config.include('.routes')
     config.scan()
+
+    create_manuals_folder(settings['localpath'])
+
     return config.make_wsgi_app()

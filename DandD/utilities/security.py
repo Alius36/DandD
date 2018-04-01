@@ -2,6 +2,8 @@
 import bcrypt
 from pyramid.security import Allow
 
+from DandD.models import User
+
 
 def hash_password(pw):
     pwhash = bcrypt.hashpw(pw.encode('utf8'), bcrypt.gensalt())
@@ -15,11 +17,10 @@ def check_password(pw, hashed_pw):
 
 # Funzione che viene chiamata ogni volta che c'é da verificare i permessi:
 # ha il compito di ritornare il ruolo (principles) dell'utente autenticato (loggato). DEVE RITORNARE UNA LISTA!!!
-def role_finder(username, request):
-    # return ['player']
-    if 'user' in request.session:
-        return [request.session['user']['role']]
-    return None
+# In ingresso prende l'id dell'utente che sta cercando di loggarsi o che é loggato.
+def role_finder(userid, request):
+    result = User.get_user_by_id(request.dbsession, userid)
+    return [result.fk_role.value]
 
 
 class RootFactory:
