@@ -99,7 +99,7 @@ class Authentication:
 
                 if result['code'] == self.success_request:
                     logger.info('LOGIN COMPLETATA! Reindirizzamento alla home.')
-                    return make_response('Success', 302, url=request.route_url('pippo'))
+                    return make_response('Success', 302, url=request.route_url('dashboard'))
                 elif result['code'] == self.not_acceptable_request:
                     logger.error('LOGIN FALLITA: {}'.format(result['message']))
                     return HTTPNotAcceptable(body=result['message'])
@@ -116,7 +116,7 @@ class Authentication:
             logger.error('LOGIN FALLITA perché manca il parametro USERNAME')
             return HTTPNotAcceptable(body='Manca USERNAME! Controlla.')
 
-    @view_config(route_name='logout', renderer='json')
+    @view_config(route_name='logout', renderer='json', request_method=['GET', 'POST'])
     def logout(self):
         request = self.request
 
@@ -126,5 +126,4 @@ class Authentication:
         logger.info('LOGOUT: url = {}, headers = {}'.format(next_url, headers))
 
         request.response.headers = headers
-        # return HTTPFound(location=next_url, headers=headers)
         return make_response('Logout successful!', 302, next_url)

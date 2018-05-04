@@ -21,7 +21,6 @@ requires = [
     'waitress',
     'pg8000',
     'bcrypt',
-    'pyramid_beaker'
 ]
 
 tests_require = [

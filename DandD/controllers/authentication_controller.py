@@ -50,14 +50,6 @@ class AuthenticationController:
         user = User.get_user_by_username(dbsession, username)
 
         if user:
-            # saving_user = {
-            #     'id': user.id,
-            #     'nome': user.nome,
-            #     'cognome': user.cognome,
-            #     'username': user.username,
-            #     'role': user.fk_role.value
-            # }
-
             if request.authenticated_userid is not None and username != request.authenticated_userid:
                 return make_response('Sei giá loggato con un\'altra utenza. Effettua il logout prima di autenticarti '
                                      'nuovamente.'.format(request.authenticated_userid), 409)

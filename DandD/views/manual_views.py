@@ -42,3 +42,7 @@ class Manual:
                                                     "per l'inconveniente!")
         else:
             return HTTPBadRequest(body="Selezionare un file.")
+
+    @view_config(route_name='manuals', renderer='../templates/mytemplate.jinja2', permission='play')
+    def upload_view(self):
+        return {}

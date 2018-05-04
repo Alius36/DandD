@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log('sono dentro!');
     $('#login_form').submit(function(event){
         event.preventDefault();
         event.stopPropagation();
@@ -29,7 +28,6 @@ $(document).ready(function(){
 
                     }
                     else {
-                        console.log('Unexepted error')
                         $.toast({
                             text: 'Ci scusiamo per questo problema. Se persiste ci contatti!',
                             allowToastClose: true,

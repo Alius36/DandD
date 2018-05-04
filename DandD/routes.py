@@ -3,7 +3,7 @@ def includeme(config):
     # config.add_route('home', '/')
 
     # AUTHENTICATION
-    config.add_route('pippo', '/pippo')
+    config.add_route('dashboard', '/dashboard')
     config.add_route('home', '/')
     config.add_route('login', '/login')
     config.add_route('registration', '/registration')
@@ -11,3 +11,4 @@ def includeme(config):
 
     # MANUALS
     config.add_route('upload', '/upload')
+    config.add_route('manuals', '/manuals')

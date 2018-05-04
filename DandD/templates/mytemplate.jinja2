@@ -1,38 +1,8 @@
-{% block header %}
-    <link rel="stylesheet" media="screen" href="{{request.static_url('DandD:static/css/bootstrap4.0.0/bootstrap.min.css')}}">
-    <link rel="stylesheet" media="screen" href="{{request.static_url('DandD:static/js/jQuery_plugin_toast/jquery.toast.css')}}">
-    <script src="{{request.static_url('DandD:static/js/jQuery/jquery-3.3.1.min.js')}}"></script>
-    <script src="{{request.static_url('DandD:static/js/bootstrap4.0.0/bootstrap.min.js')}}"></script>
-    <script src="{{request.static_url('DandD:static/js/popper1.12.9/popper.min.js')}}"></script>
-    <script src="{{request.static_url('DandD:static/js/jQuery_plugin_toast/jquery.toast.js')}}"></script>
-{% endblock %}
-
-{% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerHeader" aria-controls="navbarTogglerHeader" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <span class="navbar-brand">D&D</span>
-
-  <div class="collapse navbar-collapse" id="navbarTogglerHeader">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Manuali</a>
-      </li>
-    </ul>
-    <a class="btn btn-outline-info my-2 my-sm-0" >Logout</a>
-  </div>
-
-</nav>
-{% endblock %}
-
+{% extends "header.jinja2" %}
 {% block body %}
 <div class="content">
   <h1><span class="font-semi-bold">Pyramid</span> <span class="smaller">Alchemy project</span></h1>
   <p class="lead">Welcome to <span class="font-normal">DandD</span>, a&nbsp;Pyramid application generated&nbsp;by<br><span class="font-normal">Cookiecutter</span>.</p>
+    <!--<button id="logout" class="btn btn-outline-info my-2 my-sm-0" data-url="{{request.route_url('logout')}}">Logout</button>-->
 </div>
 {% endblock %}
